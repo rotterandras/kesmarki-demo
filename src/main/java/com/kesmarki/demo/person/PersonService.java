@@ -33,7 +33,7 @@ public class PersonService {
     private final ContactRepository contactRepository;
     private final AddressRepository addressRepository;
 
-    List<PersonView> findAll(SearchPerson searchPerson) {
+    public List<PersonView> findAll(SearchPerson searchPerson) {
         Type targetLisType = new TypeToken<List<PersonView>>() {
         }.getType();
         Person examplePerson = modelMapper.map(searchPerson, Person.class);
@@ -41,14 +41,14 @@ public class PersonService {
         return modelMapper.map(people, targetLisType);
     }
 
-    PersonView findById(Integer id) {
+    public PersonView findById(Integer id) {
         Person person = personRepository.findById(id)
                 .orElseThrow(PersonNotFoundException::new);
 
         return modelMapper.map(person, PersonView.class);
     }
 
-    PersonView save(CreatePerson data) {
+    public PersonView save(CreatePerson data) {
         Person toSave = modelMapper.map(data, Person.class);
         try {
             Person saved = personRepository.save(toSave);
