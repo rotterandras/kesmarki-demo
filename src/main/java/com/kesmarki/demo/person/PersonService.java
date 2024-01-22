@@ -1,12 +1,20 @@
 package com.kesmarki.demo.person;
 
+import com.kesmarki.demo.address.Address;
+import com.kesmarki.demo.address.AddressRepository;
+import com.kesmarki.demo.contact.Contact;
+import com.kesmarki.demo.contact.ContactRepository;
+import com.kesmarki.demo.exception.PersonNotFoundException;
+import com.kesmarki.demo.exception.SaveNotSuccessfulException;
 import com.kesmarki.demo.person.dto.CreatePerson;
 import com.kesmarki.demo.person.dto.PersonView;
 import com.kesmarki.demo.person.dto.SearchPerson;
+import com.kesmarki.demo.person.dto.UpdatePerson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +30,8 @@ public class PersonService {
 
     private final ModelMapper modelMapper;
     private final PersonRepository personRepository;
+    private final ContactRepository contactRepository;
+    private final AddressRepository addressRepository;
 
     List<PersonView> findAll(SearchPerson searchPerson) {
         Type targetLisType = new TypeToken<List<PersonView>>() {
@@ -32,12 +42,51 @@ public class PersonService {
     }
 
     PersonView findById(Integer id) {
-        throw new UnsupportedOperationException();
+        Person person = personRepository.findById(id)
+                .orElseThrow(PersonNotFoundException::new);
+
+        return modelMapper.map(person, PersonView.class);
     }
 
     PersonView save(CreatePerson data) {
-        throw new UnsupportedOperationException();
+        Person toSave = modelMapper.map(data, Person.class);
+        try {
+            Person saved = personRepository.save(toSave);
+            return modelMapper.map(saved, PersonView.class);
+        } catch (DataIntegrityViolationException exception) {
+            log.error("Save not successful: " + exception);
+            throw new SaveNotSuccessfulException();
+        }
     }
 
+    public PersonView update(int id, UpdatePerson command) {
+        Person toUpdate = personRepository.findById(id)
+                .orElseThrow(PersonNotFoundException::new);
+        Person data = modelMapper.map(command, Person.class);
+        data.setId(toUpdate.getId());
+        modelMapper.map(data, toUpdate);
+        try {
+            personRepository.flush();
+            return modelMapper.map(toUpdate, PersonView.class);
+        } catch (DataIntegrityViolationException exception) {
+            log.error("Save not successful: " + exception);
+            throw new SaveNotSuccessfulException();
+        }
+    }
+
+    public void deleteById(int id) {
+        Person toDelete = personRepository.findById(id)
+                .orElseThrow(PersonNotFoundException::new);
+
+        List<Integer> addressIds = addressRepository.findAllByPersonIdIn(List.of(toDelete.getId())).stream()
+                .map(Address::getId)
+                .toList();
+
+        List<Contact> contacts = contactRepository.findAllByAddressIdIn(addressIds);
+
+        contactRepository.deleteAll(contacts);
+        addressRepository.deleteAllById(addressIds);
+        personRepository.delete(toDelete);
+    }
 
 }

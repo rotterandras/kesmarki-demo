@@ -1,5 +1,6 @@
 package com.kesmarki.demo.person.dto;
 
+import com.kesmarki.demo.validation.Name;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdatePerson {
 
+    @Name
     private String firstName;
 
+    @Name
     private String secondName;
 }
