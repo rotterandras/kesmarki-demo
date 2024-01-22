@@ -16,6 +16,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
+
+    @Column(name = "SECOND_NAME")
+    private String secondName;
 }

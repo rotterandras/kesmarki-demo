@@ -16,7 +16,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "TYPE")
+    @Column(name = "ADDRESS_TYPE")
     @Enumerated(value = EnumType.STRING)
     private AddressType type;
 
