@@ -10,6 +10,7 @@ import com.kesmarki.demo.exception.PersonNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
 import com.kesmarki.demo.person.dto.*;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -27,7 +28,8 @@ import java.util.List;
 @Service
 public class PersonService {
 
-    private final ModelMapper modelMapper;
+    @Setter
+    private ModelMapper modelMapper;
     private final AddressService addressService;
     private final PersonRepository personRepository;
     private final ContactRepository contactRepository;
