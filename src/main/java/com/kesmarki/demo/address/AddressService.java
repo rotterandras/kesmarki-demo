@@ -68,10 +68,8 @@ public class AddressService {
             Address saved = addressRepository.save(toSave);
             return modelMapper.map(saved, AddressView.class);
         } catch (DataIntegrityViolationException exception) {
+            //fixme - nem jut ide a vezérlés!
             log.error("Save not successful: " + exception);
-            throw new SaveNotSuccessfulException();
-        } catch (Exception exception) {
-            log.error("");
             throw new SaveNotSuccessfulException();
         }
     }
