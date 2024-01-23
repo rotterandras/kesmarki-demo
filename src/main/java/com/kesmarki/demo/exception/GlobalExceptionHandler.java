@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,6 +47,13 @@ public class GlobalExceptionHandler {
         log.info(exception.toString());
         return new ValidationError("Hibás adattípus");
     }
+
+    @ExceptionHandler(PersonNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ValidationError handlePersonNotFound(PersonNotFoundException exception) {
+        log.info(exception.toString());
+        return new ValidationError("id", "Nem található személy a megadott ID-val!");
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public List<ValidationError> handleBadBodyArgumentException(MethodArgumentNotValidException exp) {
@@ -53,5 +61,14 @@ public class GlobalExceptionHandler {
         return exp.getBindingResult().getFieldErrors().stream()
                 .map(fe -> new ValidationError(fe.getField(), fe.getDefaultMessage()))
                 .collect(Collectors.toList());
+    }
+
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidationError handleBadTypeExceptions(MethodArgumentTypeMismatchException mate) {
+        log.info("Handle type mismatch exception: {}", mate.toString());
+        String field = mate.getParameter().getParameterName();
+        return new ValidationError(field, "Hibás adattípus");
     }
 }
