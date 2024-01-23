@@ -1,19 +1,12 @@
 package com.kesmarki.demo.contact;
 
 import com.kesmarki.demo.address.Address;
-import com.kesmarki.demo.address.AddressRepository;
 import com.kesmarki.demo.contact.dto.ContactView;
 import com.kesmarki.demo.contact.dto.CreateContact;
 import com.kesmarki.demo.contact.dto.UpdateContact;
 import com.kesmarki.demo.exception.ContactNotFoundException;
-import com.kesmarki.demo.exception.PersonNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
-import com.kesmarki.demo.person.Person;
-import com.kesmarki.demo.person.PersonRepository;
-import com.kesmarki.demo.person.dto.CreatePerson;
 import com.kesmarki.demo.person.dto.PersonView;
-import com.kesmarki.demo.person.dto.SearchPerson;
-import com.kesmarki.demo.person.dto.UpdatePerson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -25,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @AllArgsConstructor
@@ -36,10 +32,17 @@ public class ContactService {
     private final ContactRepository contactRepository;
 
     public List<ContactView> findAll() {
-        Type targetLisType = new TypeToken<List<PersonView>>() {
+        Type targetLisType = new TypeToken<List<ContactView>>() {
         }.getType();
         List<Contact> contacts = contactRepository.findAll();
         return modelMapper.map(contacts, targetLisType);
+    }
+
+    public Map<Integer, List<ContactView>> findAllByAddresses(List<Address> addresses) {
+        List<Integer> addressIds = addresses.stream().map(Address::getId).toList();
+        return contactRepository.findAllByAddressIdIn(addressIds).stream()
+                .map(contact -> modelMapper.map(contact, ContactView.class))
+                .collect(Collectors.groupingBy(ContactView::getAddressId));
     }
 
     public ContactView findById(Integer id) {

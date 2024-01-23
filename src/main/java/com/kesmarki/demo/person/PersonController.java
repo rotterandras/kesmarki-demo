@@ -1,9 +1,6 @@
 package com.kesmarki.demo.person;
 
-import com.kesmarki.demo.person.dto.CreatePerson;
-import com.kesmarki.demo.person.dto.PersonView;
-import com.kesmarki.demo.person.dto.SearchPerson;
-import com.kesmarki.demo.person.dto.UpdatePerson;
+import com.kesmarki.demo.person.dto.*;
 import com.kesmarki.demo.validation.Name;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -40,7 +37,7 @@ public class PersonController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PersonView findById(@PathVariable("id") @PositiveOrZero int id) {
+    public PersonInfo findById(@PathVariable("id") @PositiveOrZero int id) {
         log.info("GET request /person/id/{} invoke findById({})", id, id);
         return personService.findById(id);
     }

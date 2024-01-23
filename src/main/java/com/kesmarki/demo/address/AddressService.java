@@ -1,20 +1,12 @@
 package com.kesmarki.demo.address;
 
-import com.kesmarki.demo.address.dto.AddressView;
-import com.kesmarki.demo.address.dto.CreateAddress;
-import com.kesmarki.demo.address.dto.SearchAddress;
-import com.kesmarki.demo.address.dto.UpdateAddress;
+import com.kesmarki.demo.address.dto.*;
 import com.kesmarki.demo.contact.Contact;
 import com.kesmarki.demo.contact.ContactRepository;
+import com.kesmarki.demo.contact.ContactService;
+import com.kesmarki.demo.contact.dto.ContactView;
 import com.kesmarki.demo.exception.AddressNotFoundException;
-import com.kesmarki.demo.exception.PersonNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
-import com.kesmarki.demo.person.Person;
-import com.kesmarki.demo.person.PersonRepository;
-import com.kesmarki.demo.person.dto.CreatePerson;
-import com.kesmarki.demo.person.dto.PersonView;
-import com.kesmarki.demo.person.dto.SearchPerson;
-import com.kesmarki.demo.person.dto.UpdatePerson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -25,7 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
@@ -34,6 +28,7 @@ import java.util.List;
 public class AddressService {
 
     private final ModelMapper modelMapper;
+    private final ContactService contactService;
     private final ContactRepository contactRepository;
     private final AddressRepository addressRepository;
 
@@ -43,6 +38,21 @@ public class AddressService {
         Address exampleAddress = modelMapper.map(searchAddress, Address.class);
         List<Address> addresses = addressRepository.findAll(Example.of(exampleAddress));
         return modelMapper.map(addresses, targetLisType);
+    }
+
+    public List<AddressInfo> findAllByPersonId(Integer personId) {
+        Address exampleAddress = new Address();
+        exampleAddress.setPersonId(personId);
+        List<Address> addresses = addressRepository.findAll(Example.of(exampleAddress));
+
+        Map<Integer, List<ContactView>> addressIdContactViewsMap = contactService.findAllByAddresses(addresses);
+        return addresses.stream()
+                .map(address -> {
+                    AddressInfo info = modelMapper.map(address, AddressInfo.class);
+                    info.setContacts(addressIdContactViewsMap.get(info.getId()));
+                    return info;
+                })
+                .toList();
     }
 
     public AddressView findById(Integer id) {
@@ -59,6 +69,9 @@ public class AddressService {
             return modelMapper.map(saved, AddressView.class);
         } catch (DataIntegrityViolationException exception) {
             log.error("Save not successful: " + exception);
+            throw new SaveNotSuccessfulException();
+        } catch (Exception exception) {
+            log.error("");
             throw new SaveNotSuccessfulException();
         }
     }

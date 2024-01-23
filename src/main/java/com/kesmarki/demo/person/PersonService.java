@@ -2,14 +2,13 @@ package com.kesmarki.demo.person;
 
 import com.kesmarki.demo.address.Address;
 import com.kesmarki.demo.address.AddressRepository;
+import com.kesmarki.demo.address.AddressService;
+import com.kesmarki.demo.address.dto.AddressInfo;
 import com.kesmarki.demo.contact.Contact;
 import com.kesmarki.demo.contact.ContactRepository;
 import com.kesmarki.demo.exception.PersonNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
-import com.kesmarki.demo.person.dto.CreatePerson;
-import com.kesmarki.demo.person.dto.PersonView;
-import com.kesmarki.demo.person.dto.SearchPerson;
-import com.kesmarki.demo.person.dto.UpdatePerson;
+import com.kesmarki.demo.person.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -29,6 +28,7 @@ import java.util.List;
 public class PersonService {
 
     private final ModelMapper modelMapper;
+    private final AddressService addressService;
     private final PersonRepository personRepository;
     private final ContactRepository contactRepository;
     private final AddressRepository addressRepository;
@@ -41,11 +41,14 @@ public class PersonService {
         return modelMapper.map(people, targetLisType);
     }
 
-    public PersonView findById(Integer id) {
+    public PersonInfo findById(Integer id) {
         Person person = personRepository.findById(id)
                 .orElseThrow(PersonNotFoundException::new);
 
-        return modelMapper.map(person, PersonView.class);
+        PersonInfo info = modelMapper.map(person, PersonInfo.class);
+        List<AddressInfo> addresses = addressService.findAllByPersonId(person.getId());
+        info.setAddresses(addresses);
+        return info;
     }
 
     public PersonView save(CreatePerson data) {
