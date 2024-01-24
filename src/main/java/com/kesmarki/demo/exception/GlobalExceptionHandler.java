@@ -54,11 +54,19 @@ public class GlobalExceptionHandler {
         log.info(exception.toString());
         return new ValidationError("id", "Nem található személy a megadott ID-val!");
     }
+
     @ExceptionHandler(ContactNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ValidationError handleContactNotFound(ContactNotFoundException exception) {
         log.info(exception.toString());
         return new ValidationError("id", "Nem található elérhetőség a megadott ID-val!");
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ValidationError handleAddressNotFound(AddressNotFoundException exception) {
+        log.info(exception.toString());
+        return new ValidationError("id", "Nem található cím a megadott ID-val!");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
