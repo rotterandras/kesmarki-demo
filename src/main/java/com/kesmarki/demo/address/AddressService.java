@@ -69,8 +69,11 @@ public class AddressService {
             Address saved = addressRepository.save(toSave);
             return modelMapper.map(saved, AddressView.class);
         } catch (DataIntegrityViolationException exception) {
-            //fixme - nem jut ide a vezérlés!
+            //fixme - nem jut ide a vezérlés pedig a kivétel jó
+            //tranzakció?
             log.error("Save not successful: " + exception);
+            //ha megjavul ez a kivétel már túl általános lesz
+            //máshol is használva van
             throw new SaveNotSuccessfulException();
         }
     }
