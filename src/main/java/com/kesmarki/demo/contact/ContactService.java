@@ -7,6 +7,7 @@ import com.kesmarki.demo.contact.dto.UpdateContact;
 import com.kesmarki.demo.exception.ContactNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -25,7 +26,8 @@ import java.util.stream.Collectors;
 @Service
 public class ContactService {
 
-    private final ModelMapper modelMapper;
+    @Setter
+    private ModelMapper modelMapper;
     private final ContactRepository contactRepository;
 
     public List<ContactView> findAll() {
