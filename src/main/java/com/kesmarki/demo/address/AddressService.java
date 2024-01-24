@@ -8,6 +8,7 @@ import com.kesmarki.demo.contact.dto.ContactView;
 import com.kesmarki.demo.exception.AddressNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -26,7 +27,8 @@ import java.util.Map;
 @Service
 public class AddressService {
 
-    private final ModelMapper modelMapper;
+    @Setter
+    private ModelMapper modelMapper;
     private final ContactService contactService;
     private final ContactRepository contactRepository;
     private final AddressRepository addressRepository;
