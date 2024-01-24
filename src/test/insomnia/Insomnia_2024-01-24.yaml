@@ -1,0 +1,774 @@
+_type: export
+__export_format: 4
+__export_date: 2024-01-24T21:50:03.367Z
+__export_source: insomnia.desktop.app:v8.6.0
+resources:
+  - _id: req_4f603f6d5a63494b843c0e4ebd6916d3
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705994588555
+    created: 1705994535697
+    url: http://localhost:8080/api/nyilvantarto/contact
+    name: findAll
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994535697
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_57dbd790e8d545c893e0c15bd094354c
+    parentId: wrk_scratchpad
+    modified: 1705994531506
+    created: 1705994531506
+    name: contact
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1705994531506
+    _type: request_group
+  - _id: wrk_scratchpad
+    parentId: null
+    modified: 1705944079851
+    created: 1705944079851
+    name: Scratch Pad
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_78e0d6728a844832b0c44645a230a0f8
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705999540449
+    created: 1705996345888
+    url: http://localhost:8080/api/nyilvantarto/contact
+    name: SaveContactForEtelka
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": "1500w",
+        	"value": "34567",
+        	"addressId": 150
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994298564.75
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2bb8a386b28e49ad99d4bbe49f581393
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705996563193
+    created: 1705996535822
+    url: http://localhost:8080/api/nyilvantarto/contact/1500
+    name: UpdateContactForEtelka
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"value": "+367012345678",
+        	"addressId": 150
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994239281.6875
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2a6d914ecab141bebf5915c9533b1a1a
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705996636437
+    created: 1705996590915
+    url: http://localhost:8080/api/nyilvantarto/contact/1501
+    name: DeleteContact
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994209640.1562
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d109ad0a366545788554d33435e43894
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705996487421
+    created: 1705996478110
+    url: http://localhost:8080/api/nyilvantarto/contact
+    name: SaveContactForEtelkaToDelete
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 1501,
+        	"value": "34567 to delete",
+        	"addressId": 150
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994179998.625
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_083d7a71b4e34c48a892bb7b28f3e194
+    parentId: fld_57dbd790e8d545c893e0c15bd094354c
+    modified: 1705996244658
+    created: 1705996240388
+    url: http://localhost:8080/api/nyilvantarto/contact/100
+    name: findById
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705994061432.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_3aba10a20bbb4dd7b7c82e0531cdcc5c
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705993614329
+    created: 1705993587168
+    url: http://localhost:8080/api/nyilvantarto/address
+    name: findAll
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705993587168
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_321d012d68f347c3a71aa40770bf2b05
+    parentId: wrk_scratchpad
+    modified: 1705993543533
+    created: 1705993543533
+    name: address
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1705993543533
+    _type: request_group
+  - _id: req_40e9ba6cd84643a9b62a5435eaffdb61
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705994040965
+    created: 1705993895632
+    url: http://localhost:8080/api/nyilvantarto/address
+    name: SaveAddressForEtelka
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 150,
+        	"type": "TEMPORARY",
+        	"city": "Tésa",
+        	"street": "Kifli u. 3",
+        	"personId": 15
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705988709684.375
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e0da795b06694d058830993ee6617ab4
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1706132418112
+    created: 1705994364478
+    url: http://localhost:8080/api/nyilvantarto/address
+    name: SaveAddressForEtelkaDuplicate
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 152,
+        	"type": "TEMPORARY",
+        	"city": "Tésa",
+        	"street": "Kifli u. 7",
+        	"personId": 15
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705988099998.9219
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_dc965f3fb0cb4bbaa25e59e1ba89d8e0
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705994212504
+    created: 1705994186942
+    url: http://localhost:8080/api/nyilvantarto/address
+    name: SaveAddressToDelete
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 151,
+        	"type": "PERMANENT",
+        	"city": "Tésa",
+        	"street": "Kifli u. 4",
+        	"personId": 15
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705987490313.4688
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2f95e04e31d44dc4b73cf9154c3e760c
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705994139448
+    created: 1705994098461
+    url: http://localhost:8080/api/nyilvantarto/address/150
+    name: UpdateAddressForEtelka
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"type": "TEMPORARY",
+        	"city": "Ibrány",
+        	"street": "Kifli u. 3",
+        	"personId": 15
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705986270942.5625
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_646edcdd553d4350957d1bfc99168c4e
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705994322800
+    created: 1705994259416
+    url: http://localhost:8080/api/nyilvantarto/address/151
+    name: DeleteAddress
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705985051571.6562
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_6592693db01f4e1ea0b3f6f94a3b66ba
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705993807022
+    created: 1705993709227
+    url: http://localhost:8080/api/nyilvantarto/address?city=Vác
+    name: findAllCityIsVac
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705983832200.75
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_54d2b97ceebb4f57b914fd7302b1e77b
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705993831579
+    created: 1705993818136
+    url: http://localhost:8080/api/nyilvantarto/address?city=Vác&type=TEMPORARY
+    name: findAllCityIsVacTypeIsTemporary
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705978954717.125
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8b836caa56ac4906ba7fca87ad2f8960
+    parentId: fld_321d012d68f347c3a71aa40770bf2b05
+    modified: 1705993653154
+    created: 1705993641699
+    url: http://localhost:8080/api/nyilvantarto/address/10
+    name: findById
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705974077233.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d7cc8b07ccb549509353240e8777ab64
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705958110829
+    created: 1705954567299
+    url: http://localhost:8080/api/nyilvantarto/person
+    name: SaveEtelka
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": 15,
+        	"firstName": "Etelka",
+        	"secondName": "Tatár"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705954567299
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_7a209678c3f849dda41b2efc98dcbe39
+    parentId: wrk_scratchpad
+    modified: 1705944683123
+    created: 1705944592686
+    name: person
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1705944592686
+    _type: request_group
+  - _id: req_4bf8d887687d4b2d90e8fadcbde7ab3d
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1706000900550
+    created: 1705999359826
+    url: http://localhost:8080/api/nyilvantarto/person
+    name: SaveEtelkaWrong
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": null,
+        	"firstName": "",
+        	"secondName": "Tatár"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705953321489.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_efad770810ee43a08bc8bca024bd02c1
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705958158719
+    created: 1705958134935
+    url: http://localhost:8080/api/nyilvantarto/person/15
+    name: DeleteEtelka
+    description: ""
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705952075680
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5268c5a9727b4ea1be85139958a95176
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705958120413
+    created: 1705957970445
+    url: http://localhost:8080/api/nyilvantarto/person/15
+    name: UpdateEtelka
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstName": "Etelka",
+        	"secondName": "Kozák"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705949584061
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_20d34c6ef7a04e619e66d76dddc03d2d
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705944693788
+    created: 1705944600823
+    url: http://localhost:8080/api/nyilvantarto/person
+    name: findAll
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600823
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_265023f0dcc54717985719017a83dc07
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705993263945
+    created: 1705952605339
+    url: http://localhost:8080/api/nyilvantarto/person/1
+    name: findByIdKovacs
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600798
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bad2ac363ae649ed916a661f2cd1e182
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705993288948
+    created: 1705993275618
+    url: http://localhost:8080/api/nyilvantarto/person/15
+    name: findByIdEtelka
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600785.5
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_f4b92383b8724a6bb701b6497be9ba3c
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705993779936
+    created: 1705949298353
+    url: http://localhost:8080/api/nyilvantarto/person?firstName=Lajos
+    name: findAllFirstNameIsLajos
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600773
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4f60764ed4984a809df8fb021e95ae58
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705998997088
+    created: 1705998976064
+    url: http://localhost:8080/api/nyilvantarto/person?firstName=
+    name: findAllFirstNameIsWrong
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600748
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e18476d36a954b6a81ef73f0c2e2dcf5
+    parentId: fld_7a209678c3f849dda41b2efc98dcbe39
+    modified: 1705993793534
+    created: 1705949887294
+    url: http://localhost:8080/api/nyilvantarto/person?secondName=Teszt
+    name: findAllSecondNameIsTeszt
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/8.6.0
+    authentication: {}
+    metaSortKey: -1705944600723
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    parentId: wrk_scratchpad
+    modified: 1705944412139
+    created: 1705944412139
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1705944412139
+    _type: environment
+  - _id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    parentId: wrk_scratchpad
+    modified: 1705944412142
+    created: 1705944412142
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
