@@ -30,9 +30,9 @@ class ContactServiceTest {
 
     private ModelMapper modelMapper = new ModelMapper();
     @InjectMocks
-    private ContactService contactServiceMock;
+    private ContactService contactService;
     @Mock
-    private ContactRepository contactRepository;
+    private ContactRepository contactRepositoryMock;
 
     Contact contact = new Contact(1, "1-234-234", 1);
     ContactView contactView = new ContactView(1, "1-234-234", 1);
@@ -42,127 +42,127 @@ class ContactServiceTest {
     @BeforeEach
     void init() {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        contactServiceMock.setModelMapper(modelMapper);
+        contactService.setModelMapper(modelMapper);
     }
 
     @Test
     void findAllEmptyList() {
-        when(contactRepository.findAll())
+        when(contactRepositoryMock.findAll())
                 .thenReturn(Collections.emptyList());
-        List<ContactView> result = contactServiceMock.findAll();
+        List<ContactView> result = contactService.findAll();
         assertThat(result)
                 .isInstanceOf(ArrayList.class)
                 .isEmpty();
 
-        verify(contactRepository, times(1)).findAll();
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findAll();
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void findAllOneElementList() {
-        when(contactRepository.findAll())
+        when(contactRepositoryMock.findAll())
                 .thenReturn(List.of(contact));
-        List<ContactView> result = contactServiceMock.findAll();
+        List<ContactView> result = contactService.findAll();
         assertThat(result)
                 .isInstanceOf(ArrayList.class)
                 .hasSize(1)
                 .containsExactly(contactView);
 
-        verify(contactRepository, times(1)).findAll();
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findAll();
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void findByIdSuccessfull() {
-        when(contactRepository.findById(anyInt())).thenReturn(Optional.of(contact));
-        assertThat(contactServiceMock.findById(1))
+        when(contactRepositoryMock.findById(anyInt())).thenReturn(Optional.of(contact));
+        assertThat(contactService.findById(1))
                 .isInstanceOf(ContactView.class)
                 .isEqualTo(contactView);
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void findByIdUnsuccessfull() {
-        when(contactRepository.findById(anyInt())).thenThrow(new AddressNotFoundException());
-        assertThrows(AddressNotFoundException.class, () -> contactServiceMock.findById(anyInt()));
+        when(contactRepositoryMock.findById(anyInt())).thenThrow(new AddressNotFoundException());
+        assertThrows(AddressNotFoundException.class, () -> contactService.findById(anyInt()));
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void saveSuccessful() {
-        when(contactRepository.save(any())).thenReturn(contact);
-        assertThat(contactServiceMock.save(new CreateContact()))
+        when(contactRepositoryMock.save(any())).thenReturn(contact);
+        assertThat(contactService.save(new CreateContact()))
                 .isInstanceOf(ContactView.class)
                 .isEqualTo(contactView);
 
-        verify(contactRepository, times(1)).save(any());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).save(any());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void saveNotSuccessful() {
-        when(contactRepository.save(any())).thenThrow(new DataIntegrityViolationException(""));
-        assertThrows(SaveNotSuccessfulException.class, () -> contactServiceMock.save(new CreateContact()));
+        when(contactRepositoryMock.save(any())).thenThrow(new DataIntegrityViolationException(""));
+        assertThrows(SaveNotSuccessfulException.class, () -> contactService.save(new CreateContact()));
 
-        verify(contactRepository, times(1)).save(any());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).save(any());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void updateSuccessful() {
-        when(contactRepository.findById(anyInt())).thenReturn(Optional.of(contact));
-        doNothing().when(contactRepository).flush();
-        assertThat(contactServiceMock.update(1, updateContact))
+        when(contactRepositoryMock.findById(anyInt())).thenReturn(Optional.of(contact));
+        doNothing().when(contactRepositoryMock).flush();
+        assertThat(contactService.update(1, updateContact))
                 .isInstanceOf(ContactView.class)
                 .isEqualTo(updatedContactView);
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verify(contactRepository, times(1)).flush();
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verify(contactRepositoryMock, times(1)).flush();
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void updateNotSuccessfulInvalidData() {
-        when(contactRepository.findById(anyInt())).thenReturn(Optional.of(contact));
-        doThrow(new DataIntegrityViolationException("")).when(contactRepository).flush();
-        assertThrows(SaveNotSuccessfulException.class, () -> contactServiceMock.update(1, new UpdateContact()));
+        when(contactRepositoryMock.findById(anyInt())).thenReturn(Optional.of(contact));
+        doThrow(new DataIntegrityViolationException("")).when(contactRepositoryMock).flush();
+        assertThrows(SaveNotSuccessfulException.class, () -> contactService.update(1, new UpdateContact()));
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verify(contactRepository, times(1)).flush();
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verify(contactRepositoryMock, times(1)).flush();
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void updateNotSuccessfulEntityNotFound() {
-        when(contactRepository.findById(anyInt())).thenThrow(new AddressNotFoundException());
-        assertThrows(AddressNotFoundException.class, () -> contactServiceMock.update(1, new UpdateContact()));
+        when(contactRepositoryMock.findById(anyInt())).thenThrow(new AddressNotFoundException());
+        assertThrows(AddressNotFoundException.class, () -> contactService.update(1, new UpdateContact()));
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verify(contactRepository, times(0)).flush();
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verify(contactRepositoryMock, times(0)).flush();
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void deleteByIdSuccessful() {
-        when(contactRepository.findById(anyInt())).thenReturn(Optional.of(contact));
-        doNothing().when(contactRepository).delete(any());
+        when(contactRepositoryMock.findById(anyInt())).thenReturn(Optional.of(contact));
+        doNothing().when(contactRepositoryMock).delete(any());
 
-        contactServiceMock.deleteById(1);
+        contactService.deleteById(1);
 
-        verify(contactRepository, times(1)).delete(any());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).delete(any());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 
     @Test
     void deleteByIdNotSuccessfulEntityNotFound() {
-        when(contactRepository.findById(anyInt())).thenThrow(new ContactNotFoundException());
-        assertThrows(ContactNotFoundException.class, () -> contactServiceMock.deleteById(1));
+        when(contactRepositoryMock.findById(anyInt())).thenThrow(new ContactNotFoundException());
+        assertThrows(ContactNotFoundException.class, () -> contactService.deleteById(1));
 
-        verify(contactRepository, times(1)).findById(anyInt());
-        verifyNoMoreInteractions(contactRepository);
+        verify(contactRepositoryMock, times(1)).findById(anyInt());
+        verifyNoMoreInteractions(contactRepositoryMock);
     }
 }
