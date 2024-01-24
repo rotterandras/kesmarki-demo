@@ -1,6 +1,5 @@
 package com.kesmarki.demo.contact.dto;
 
-import com.kesmarki.demo.validation.Name;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

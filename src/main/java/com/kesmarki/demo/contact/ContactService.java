@@ -6,13 +6,11 @@ import com.kesmarki.demo.contact.dto.CreateContact;
 import com.kesmarki.demo.contact.dto.UpdateContact;
 import com.kesmarki.demo.exception.ContactNotFoundException;
 import com.kesmarki.demo.exception.SaveNotSuccessfulException;
-import com.kesmarki.demo.person.dto.PersonView;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +18,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @AllArgsConstructor

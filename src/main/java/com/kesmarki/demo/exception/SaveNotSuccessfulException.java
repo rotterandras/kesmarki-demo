@@ -1,4 +1,4 @@
 package com.kesmarki.demo.exception;
 
-public class SaveNotSuccessfulException extends RuntimeException{
+public class SaveNotSuccessfulException extends RuntimeException {
 }

@@ -1,6 +1,5 @@
 package com.kesmarki.demo.contact;
 
-import com.kesmarki.demo.address.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

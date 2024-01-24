@@ -153,6 +153,7 @@ class PersonControllerMockMvcTest {
                 Arguments.arguments(1, "    ", "", List.of(firstName, secondName))
         );
     }
+
     @Test
     void updateSuccessful() throws Exception {
         when(serviceMock.update(anyInt(), any())).thenReturn(kovacsView);
@@ -201,6 +202,7 @@ class PersonControllerMockMvcTest {
         verify(serviceMock, times(1)).deleteById(anyInt());
         verifyNoMoreInteractions(serviceMock);
     }
+
     @Test
     void deleteByIdNotSuccessfulPersonNotFound() throws Exception {
         ValidationError response = new ValidationError("id", "Nem található személy a megadott ID-val!");

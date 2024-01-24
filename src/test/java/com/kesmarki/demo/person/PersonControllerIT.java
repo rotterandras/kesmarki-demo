@@ -1,8 +1,6 @@
 package com.kesmarki.demo.person;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kesmarki.demo.address.AddressRepository;
-import com.kesmarki.demo.contact.ContactRepository;
 import com.kesmarki.demo.exception.ValidationError;
 import com.kesmarki.demo.person.dto.CreatePerson;
 import com.kesmarki.demo.person.dto.PersonInfo;
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -84,14 +81,14 @@ class PersonControllerIT {
     @Test
     void saveNotSuccessful() throws Exception {
         CreatePerson createKovacsWrong = new CreatePerson(1, "    ", "");
-        ValidationError firstName = new ValidationError("firstName", "Name must not be blank or empty");
-        ValidationError secondName = new ValidationError("secondName", "Name must not be blank or empty");
+        ValidationError firstNameError = new ValidationError("firstName", "Name must not be blank or empty");
+        ValidationError secondNameError = new ValidationError("secondName", "Name must not be blank or empty");
 
         mockMvc.perform(post("/api/nyilvantarto/person")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(createKovacsWrong)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().json(objectMapper.writeValueAsString(List.of(firstName, secondName))));
+                .andExpect(content().json(objectMapper.writeValueAsString(List.of(firstNameError, secondNameError))));
 
     }
 
@@ -118,7 +115,7 @@ class PersonControllerIT {
 
     @Test
     void updateNotSuccessfulNotFound() throws Exception {
-       ValidationError error = new ValidationError("id", "Nem található személy a megadott ID-val!");
+        ValidationError error = new ValidationError("id", "Nem található személy a megadott ID-val!");
         mockMvc.perform(put("/api/nyilvantarto/person/1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(updateKovacs)))
@@ -129,14 +126,14 @@ class PersonControllerIT {
     @Test
     void updateNotSuccessfulDataViolation() throws Exception {
         UpdatePerson updateKovacsWrong = new UpdatePerson("    ", "");
-        ValidationError firstName = new ValidationError("firstName", "Name must not be blank or empty");
-        ValidationError secondName = new ValidationError("secondName", "Name must not be blank or empty");
+        ValidationError firstNameError = new ValidationError("firstName", "Name must not be blank or empty");
+        ValidationError secondNameError = new ValidationError("secondName", "Name must not be blank or empty");
 
         mockMvc.perform(put("/api/nyilvantarto/person/1")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(updateKovacsWrong)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().json(objectMapper.writeValueAsString(List.of(firstName, secondName))));
+                .andExpect(content().json(objectMapper.writeValueAsString(List.of(firstNameError, secondNameError))));
     }
 
     @Test

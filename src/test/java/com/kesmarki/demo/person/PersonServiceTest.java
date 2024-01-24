@@ -26,7 +26,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {
@@ -99,6 +98,7 @@ class PersonServiceTest {
         verifyNoMoreInteractions(personRepositoryMock);
         verifyNoMoreInteractions(addressService);
     }
+
     @Test
     @DisplayName("FindById() unsuccessful")
     void findByIdUnsuccessfull() {
@@ -120,6 +120,7 @@ class PersonServiceTest {
         verify(personRepositoryMock, times(1)).save(any());
         verifyNoMoreInteractions(personRepositoryMock);
     }
+
     @Test
     @DisplayName("Save() not successful")
     void saveNotSuccessful() {
@@ -133,7 +134,7 @@ class PersonServiceTest {
     @Test
     @DisplayName("Update() successful")
     void updateSuccessful() {
-        PersonView result = new PersonView(1, "Ádám","Kovács");
+        PersonView result = new PersonView(1, "Ádám", "Kovács");
         UpdatePerson update = new UpdatePerson("Ádám", "Kovács");
         when(personRepositoryMock.findById(anyInt())).thenReturn(Optional.of(AKOS_KOVACS));
         doNothing().when(personRepositoryMock).flush();
