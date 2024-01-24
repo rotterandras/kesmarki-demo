@@ -15,7 +15,7 @@ public class Contact {
     @Id
     private Integer id;
 
-    @Column(name = "VALUE")
+    @Column(name = "CONTACT_VALUE")
     private String value;
 
     @Column(name = "ADDRESS_ID")

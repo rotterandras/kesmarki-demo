@@ -23,3 +23,5 @@ address_id int not null ,
 primary key (id),
 foreign key (address_id) references address(id)
 );
+
+EXEC sp_RENAME 'contact.value' , 'contact_value', 'COLUMN'
